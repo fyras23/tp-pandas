@@ -105,7 +105,55 @@ total_ttc = (stock["Quantite"] * stock["PrixTotalTTC"]).sum()
 print("Total TTC for all articles:", total_ttc)
 
 
+#tp ex1
 
+import pandas as pd
+#a
+com = pd.read_csv("C:/Users/firas/Desktop/commandes.csv", sep=";", decimal=".", encoding="utf-8")
+print(com)
+print(com.shape)
+#B
+com["PrixTotal"] = com["PrixPlat"] * com["NbrePlats"]
+print(com.head())
+#C
+montant_total = com["PrixTotal"].sum()
+print("Le montant total des commandes est  : ", montant_total)
+#D
+commandes_nadia = com.loc[com["NomPrenom"] == "JEMNI Nadia"]
+print("Liste des commandes servies par JEMNI Nadia :", commandes_nadia)
+#E
+
+
+import matplotlib.pyplot as plt
+total_commande = com["PrixTotal"].groupby(com["NumTable"]).sum()
+plt.hist(total_commande)
+plt.title("Histogramme des totaux des prix des plats")
+plt.show()
+
+#F
+com_tri = com.sort_values(by=['NumTable', 'NomPlat'], ascending=[True, False])
+print(com_tri)
+
+
+#tp ex2
+#A
+Collecte = pd.read_csv("C:/Users/firas/Desktop/Collecte.csv", sep=";", decimal=".", encoding="utf-8")
+print(Collecte.head())
+#B
+print(Collecte.info())
+print(Collecte.head(6))
+#C
+Collecte.loc[4, "Quantité"] = 5560
+print(Collecte)
+#D
+#print(Collecte.loc[Collecte['Quantité collectée'] >= 4500])
+#E
+print("here")
+Collecte_Tri = Collecte.sort_values(by=['Quantité'], ascending=True)
+print(Collecte_Tri)
+#F
+moyenne = Collecte['Quantité'].mean()
+print("La moyenne des quantités collectées est de :", moyenne)
 
 
 
